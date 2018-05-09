@@ -1,0 +1,9 @@
+parameters:
+    pdo.class: PDO
+    pdo.attr_errmode: 3
+    pdo.errmode_exception: 2
+    pdo.options:
+        %pdo.attr_errmode%: %pdo.errmode_exception%
+    dbGsb.dsn: mysql:host=localhost;dbname=gsbtest
+    dbGsb.username: root
+    dbGsb.password: null

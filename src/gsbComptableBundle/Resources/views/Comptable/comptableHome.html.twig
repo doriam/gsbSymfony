@@ -1,0 +1,40 @@
+{% extends "@gsbComptable/base.html.twig" %}
+
+{% block body %}
+    
+    <div class="container-fluid">    
+        <div class="row">
+            <div class="well col-lg-12">
+                <ul class="nav nav-pills">
+                    <li role="">
+                        <a class="btn btn-primary" href="{{ url('comptable_fiche_frais_consulter') }}" role="button">
+                            Validation de frais
+                        </a>
+                    </li>
+                    <li role="presentation">
+                        <a class="btn btn-success" 
+                           href="{{ path('gsb_comptable_nouveau_frais') }}" 
+                           role="button">
+                            Suivi de paiement
+                        </a>
+                    </li>
+                    <li role="presentation" class='pull-right'>
+                        <h4>
+                            Session de:<br/>
+                            {{ app.session.get('comptable').nom 
+                              ~ " " ~
+                              app.session.get('comptable').prenom}}
+                        </h4>
+                        <a href="{{ path('gsb_comptable_deconnexion') }}"
+                           class='btn btn-primary'>
+                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+                            Déconnexion
+                        </a>
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+        {% block child %}{% endblock %}
+    </div>
+{% endblock %}

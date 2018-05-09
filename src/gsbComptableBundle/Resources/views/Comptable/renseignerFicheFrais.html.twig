@@ -1,0 +1,75 @@
+{% extends "ACYGGsbFraisBundle:Visiteur:visiteurHome.html.twig" %}
+
+{% block child %}    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">  
+                {% form_theme formFrais 'bootstrap_3_layout.html.twig' %}
+                {{ form_start(formFrais) }}
+                <div class="row">
+                    <div class="col-lg-12 ">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>Frais au forfait</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group list-inline ">
+                                
+                                {% for ligneFraisForfait in formFrais.idlignefraisforfait %}
+                                    
+                                        
+                                        <li class="list-group-item ">
+                                            {% form_theme ligneFraisForfait 'bootstrap_3_layout.html.twig' %}
+                                            {{ form_label(ligneFraisForfait, '') }}
+                                            {{ form_row(ligneFraisForfait,{'label': ligneFraisForfait.vars.value.idfraisforfait.libelle}) }}
+                                        </li>
+                                       
+                                {% endfor %}
+                                </ul>
+                                <p>{{ form_row(formFrais.enregistrer) }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-9">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>Hors forfait</h3>
+                            </div>
+                            <div class="panel-body">
+                                <ul class="list-group list-inline ">
+                                    {% for ligneFraisHorsForfait in formFrais.idlignefraishorsforfait %}
+                                        <li class="list-group-item ">{{ form_row(ligneFraisHorsForfait) }}</li>
+                                    {% endfor %}
+                                </ul>
+                                
+                                
+                                    <div class="form-group">
+                                        <a href="{{ path('visiteur_ajouter_frais_hors_forfait') }}" class="btn btn-success">Ajouter</a>
+                                        <button type="submit" id="ficheFrais_enregistrer" name="ficheFrais[enregistrer]" class="btn-default btn">Enregistrer</button>
+                                    </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3>Hors classification</h3>
+                            </div>
+                            <div class="panel-body">
+                                {{ form_row(formFrais.nbJustificatifs) }}
+                                {{ form_row(formFrais.montantValide) }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+                {{ form_end(formFrais) }}
+        </div>
+    </div>
+
+
+{% endblock %}

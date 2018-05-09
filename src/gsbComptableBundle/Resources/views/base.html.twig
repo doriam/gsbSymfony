@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}
+             {%stylesheets'@gsbComptableBundle/Resources/public/css/bootstrap.css'  filter='cssrewrite'%}
+                <link rel="stylesheet" href="{{asset_url}}" type="text/css"/>
+            {%endstylesheets%}
+            
+            {%image'@gsbComptableBundle/Resources/public/images/logo.png'%}
+                <div class="well">
+                    <img src="{{asset_url}}" class="center-block img-rounded"/>
+                </div>
+            {%endimage%}
+            <title>{% block title %} Gsb Frais {% endblock %}</title>
+        {% endblock %}
+    </head>
+    
+    <body>
+        <div class="col-lg-4 col-lg-offset-4">
+                {% if app.session.flashbag.has('error') %}
+                    <div class="alert alert-danger text-center">
+                       {{ app.session.flashbag.get('error').0 }}<br/>
+                    </div>        
+                {%endif%}
+        </div>
+        <div class="col-lg-4 col-lg-offset-4">
+                {% if app.session.flashbag.has('success') %}
+                    <div class="alert alert-success text-center">
+                       {{ app.session.flashbag.get('success').0 }}<br/>
+                    </div>        
+                {%endif%}
+        </div>
+        {% if app.session.get('comptable') %}
+        <div  id="content">
+            {% block body %}
+            {% endblock %}
+        </div>
+        {% else %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="alert alert-danger text-center">
+                            <p>Vous devez être authentifié pour accéder à cette page</p>
+                            <a href="{{ path('gsb_comptable_homepage') }}" class='btn btn-primary'>S'authentifier</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        <div id="footer">
+            {% block footer %}
+                <nav class="navbar navbar-fixed-bottom center-block">
+                    &copy; Copyright 2018
+                <nav>
+            {% endblock %}
+        </div>
+
+        
+    </body>
+</html>

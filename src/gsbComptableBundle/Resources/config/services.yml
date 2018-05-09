@@ -1,0 +1,13 @@
+imports:
+    - { resource: "parameters.yml" }
+services:
+#    gsb_comptable.example:
+#        class: gsbComptableBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    dbGsb:
+        class: %pdo.class%
+        arguments:
+            - %dbGsb.dsn%
+            - %dbGsb.username%
+            - %dbGsb.password%
+            - %pdo.options%

@@ -1,0 +1,99 @@
+{% extends "@gsbComptable/Comptable/consulterFicheFrais.html.twig" %}
+
+{% block result %}
+   
+
+
+
+
+
+    <div class='row'>
+        <div class='col-lg-8 col-lg-offset-2'>
+            
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Frais au forfait</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="well">
+                                <table class="table table-striped">
+                                        <tr>
+                                            <th>Type de frais</th>
+                                            <th>Quantite</th>
+                                            <th>situation</th>
+                                            <th>Date opération</th>
+                                            <th></th>
+                                        </tr>
+
+                                        {% for ligneFraisForfait in ficheFrais.idlignefraisforfait %}
+                                            <tr>
+                                                <td>{{ ligneFraisForfait.idfraisforfait.libelle }}</td>
+                                                <td>{{ ligneFraisForfait.quantite * ligneFraisForfait.idfraisforfait.montant }}</td>
+                                                <td>{{ ligneFraisForfait.idetat.libelle }}</td>
+                                                <td>{{ ligneFraisForfait.datemodif | date('d/m/y') }}</td>
+                                            </tr>                                            
+                                        {% endfor %}
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Frais hors forfait</h3>
+                        </div>
+                        <div class="panel-body">
+                            
+                            <table class="table table-striped">
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Libelle</th>
+                                        <th>Montant</th>
+                                        <th>situation</th>
+                                        <th>Date opération</th>
+                                    </tr>
+                                  
+                                    {% for ligneFraisHorsForfait in ficheFrais.idlignefraishorsforfait %}
+                                        <tr>
+                                            <td>{{ ligneFraisHorsForfait.date | date('d/m/y')}}</td>
+                                            <td>{{ ligneFraisHorsForfait.libelle }}</td>
+                                            <td>{{ ligneFraisHorsForfait.montant }}</td>
+                                            <td>{{ ligneFraisHorsForfait.idetat.libelle }}</td>
+                                            <td>{{ ligneFraisHorsForfait.datemodif | date('d/m/y') }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                </table>    
+                                    
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h3>Frais hors classification</h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table table-striped">
+                                <tr>
+                                    <th>Nombre de justifcatifs</th>
+                                    <th>Montant</th>
+                                    <th>Situation</th>
+                                    <th>Date opération</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ ficheFrais.nbjustificatifs }}</td>
+                                    <td>{{ ficheFrais.montantvalide }}</td>
+                                    <td>{{ ficheFrais.idEtat.libelle }}</td>
+                                    <td>{{ ficheFrais.datemodif | date('d/m/y') }}</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+    
+{% endblock %}

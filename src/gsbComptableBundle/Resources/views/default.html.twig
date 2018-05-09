@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        {% block head %}  
+             {%stylesheets'@gsbComptableBundle/Resources/public/css/bootstrap.css'  filter='cssrewrite'%}
+                <link rel="stylesheet" href="{{asset_url}}" type="text/css"/>
+            {%endstylesheets%}
+            
+            {%image'@gsbComptableBundle/Resources/public/images/logo.png'%}
+                <div class="well">
+                    <img src="{{asset_url}}" class="center-block img-rounded"/>
+                </div>
+            {%endimage%}
+            <title>
+                {% block title %} 
+                    Gsb Frais 
+                {% endblock %}
+            </title>
+        {% endblock %} 
+    </head>
+    <body>
+                    {%javascripts'@gsbComptableBundle/Resources/public/js/jquery-1.12.2.min.js'
+                     '@gsbComptableBundle/Resources/public/js/bootstrap.js'%}
+        <script src="{{asset_url}}"></script>
+        {%endjavascripts%}
+        <div id="content">
+            {% block body %}
+
+            {% endblock %}
+        </div>
+        
+        <div id="footer">
+            {% block footer %}
+            <center>
+                <nav class="navbar navbar-fixed-bottom center-block">
+                    &copy; Copyright 2018
+                <nav>
+            </center>
+            {% endblock %}
+        </div>
+    </body>
+</html>

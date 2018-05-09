@@ -1,0 +1,23 @@
+gsb_comptable_homepage:
+    path:     /
+    defaults: { _controller: gsbComptableBundle:Default:index }
+    
+gsb_comptable_deconnexion:
+    path:     /deconnexion
+    defaults: { _controller: gsbComptableBundle:Default:deconnexion }
+
+gsb_comptable_comptable:
+    path:   /comptable
+    defaults: { _controller: gsbComptableBundle:Comptable:index }
+
+comptable_fiche_frais_consulter:
+    path: /comptable/fichefrais/consulter
+    defaults: { _controller: gsbComptableBundle:Comptable:consulterFicheFrais }
+    
+gsb_comptable_nouveau_frais:
+    path:   /nouveaufrais
+    defaults: { _controller: gsbComptableBundle:Comptable:renseignerFicheFrais }
+    
+comptable_ajouter_frais_hors_forfait:
+    path: /comptable/fichefrais/ajouterHorsForfait
+    defaults: { _controller: gsbComptableBundle:Comptable:ajouterFraisHorsForfait }
