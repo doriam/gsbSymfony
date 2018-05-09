@@ -1,17 +1,1 @@
 {% extends "@gsbComptable/Comptable/comptableHome.html.twig" %}
-
-{% block child %}
-    <div class='row'>
-        <div class='col-lg-4 col-lg-offset-4'>
-            <div class='well text-center'>
-                {% form_theme formMois 'bootstrap_3_layout.html.twig' %}
-                {{ form_start(formMois) }}
-                <p>{{ form_row(formMois.periode) }}
-                </p>
-                {{ form_row(formMois.selectionner) }}
-                {{ form_end(formMois) }}
-            </div>
-        </div>
-    </div>
-    {% block result %}{% endblock %}
-{% endblock %}

@@ -10,9 +10,13 @@ gsb_comptable_comptable:
     path:   /comptable
     defaults: { _controller: gsbComptableBundle:Comptable:index }
 
-comptable_fiche_frais_consulter:
-    path: /comptable/fichefrais/consulter
-    defaults: { _controller: gsbComptableBundle:Comptable:consulterFicheFrais }
+comptable_fiche_frais_consulter_mois:
+    path: /comptable/fichefrais/consulterMoisDispo
+    defaults: { _controller: gsbComptableBundle:Comptable:consulterMoisDisponibles }
+
+comptable_fiche_frais_consulter_visiteur:
+    path: /comptable/fichefrais/consulterMoisDispo/consulterVisiteursDispo
+    defaults: { _controller: gsbComptableBundle:Comptable:consulterVisiteursDisponibles }
     
 gsb_comptable_nouveau_frais:
     path:   /nouveaufrais

@@ -37,7 +37,7 @@ class ComptableController extends Controller {
         return $ficheFrais;
     }
     //Consulter les mois dans lesquels on trouve de fiches de frais à valider
-    public function ConsulterFicheFraisAction(){
+    public function consulterMoisDisponiblesAction(){
         $em = $this->getDoctrine()->getManager();
         $lesFichesDeFrais = $em->getRepository('gsbComptableBundle:Fichefrais')
                             ->findBy(array('idetat' => 'CR'));
@@ -57,9 +57,33 @@ class ComptableController extends Controller {
 
         //Condition - si le comptable clique sur selectionner
         if($formMois->isValid() && $formMois->isSubmitted()){
+                //var_dump($formMois);
+                $session_mois = new Session();
+                $session_mois->set('mois',$formMois->get('periode')->getData());
+                
 
-            $listeVisiteurs = $em->getRepository('gsbComptableBundle:Fichefrais')
-                        ->findByLeMois($formMois->get('periode')->getData());
+                  return $this->redirect($this->generateUrl('comptable_fiche_frais_consulter_visiteur'));
+            /*
+            return $this->render('@gsbComptable/Comptable/consulterVisiteur.html.twig', 
+                    array(
+                       'formVisiteurs' => $formVisiteurs->createView()
+                        
+                    ));
+            */
+        }
+        // ---- Fin de la condition 
+
+        return $this->render('@gsbComptable/Comptable/consulterMois.html.twig', 
+                array('formMois' => $formMois->createView()
+            ));
+    }
+
+    public function consulterVisiteursDisponiblesAction(){
+            $moisselectionne=$this->get('session')->get('mois');
+            
+        $em = $this->getDoctrine()->getManager();
+        $listeVisiteurs = $em->getRepository('gsbComptableBundle:Fichefrais')
+                        ->findByLeMois($moisselectionne);
             $lesVisiteurs =[];
             foreach($listeVisiteurs as $unVisiteur){
             $lesVisiteurs[$unVisiteur->getIdVisiteur()->getNom()] = $unVisiteur->getIdVisiteur()->getNom();
@@ -77,21 +101,11 @@ class ComptableController extends Controller {
                     ->getForm();
                     $request = Request::createFromGlobals();
                     $formVisiteurs->handleRequest($request);
-
+            
             return $this->render('@gsbComptable/Comptable/consulterVisiteur.html.twig', 
                     array(
                        'formVisiteurs' => $formVisiteurs->createView()
                         
                     ));
-        }
-        // ---- Fin de la condition 
-
-        return $this->render('@gsbComptable/Comptable/consulterFicheFrais.html.twig', 
-                array('formMois' => $formMois->createView()
-            ));
-    }
-
-    public function ConsulLaFicheFrais(){
-        
     }
 }
